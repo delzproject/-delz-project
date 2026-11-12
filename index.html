@@ -1,11 +1,413 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Web Delz</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fadel - Vibe Coder Tools</title>
+<meta name="description" content="Fadel adalah programmer vibe coder dari Indonesia yang membangun web ini secara gratis untuk kalian. TikTok: @delowph_">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Fad*** J***** P********* K******","alternateName":"Fadel","jobTitle":"Vibe Coder","description":"Fadel adalah programmer vibe coder dari Indonesia.","sameAs":["https://www.tiktok.com/@delowph_"]}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',system-ui,sans-serif}
+body{background:#06090B;color:#fff;min-height:100vh;padding:20px 16px 110px;background-image:radial-gradient(700px 320px at 50% -80px, rgba(0,255,136,.18), transparent 65%)}
+.container{max-width:540px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.page{display:none;flex-direction:column;gap:18px;animation:masuk .35s ease}
+.page.active{display:flex}
+@keyframes masuk{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:24px;backdrop-filter:blur(14px);transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,255,136,.35);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 28px rgba(0,255,136,.15)}
+.card:active{transform:translateY(-1px) scale(.99)}
+.hero{text-align:center;padding:32px 24px}
+.foto{width:110px;height:110px;border-radius:50%;border:2px solid #00ff88;object-fit:cover;box-shadow:0 0 0 6px rgba(0,255,136,.12),0 0 32px rgba(0,255,136,.35);background:#000;transition:transform .3s}
+.foto:hover{transform:scale(1.05) rotate(2deg)}
+h1{font-family:'Space Grotesk',sans-serif;font-size:32px;line-height:1.1;margin:14px 0 6px}
+h1 span{color:#00ff88}
+.sub{color:#9ca3af;font-size:14px;line-height:1.5}
+.badge{display:inline-block;background:#00ff88;color:#000;font-size:12px;font-weight:700;padding:6px 12px;border-radius:99px;margin-top:14px}
+.judul{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:2px;color:#00ff88;margin-bottom:12px}
+p{font-size:15px;line-height:1.7;color:#d1d5db}
+.skill{display:inline-block;background:rgba(0,255,136,.11);border:1px solid rgba(0,255,136,.28);color:#a7f3d0;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;margin:4px 4px 0 0;transition:.2s}
+.skill:hover{background:rgba(0,255,136,.22);transform:translateY(-2px)}
+.faq-q{font-weight:700;font-size:14.5px;margin-top:14px}
+.faq-a{color:#9ca3af;font-size:14px;margin-top:3px;line-height:1.6}
+.btn{display:block;text-align:center;padding:14px;border-radius:14px;text-decoration:none;font-weight:700;font-size:14px;transition:all .2s ease;cursor:pointer;border:none;position:relative;overflow:hidden}
+.btn-green{background:#00ff88;color:#000;box-shadow:0 4px 18px rgba(0,255,136,.25)}
+.btn-white{background:#fff;color:#000}
+.btn-ghost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#fff}
+.btn:disabled{opacity:.4;pointer-events:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,255,136,.3)}
+.btn:active{transform:translateY(0) scale(.97);box-shadow:0 4px 12px rgba(0,255,136,.2)}
+.btn::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .5s}
+.btn:hover::after{left:130%}
+.btn.loading{pointer-events:none;opacity:.75}
+.btn.loading::before{content:'';width:16px;height:16px;border:2px solid rgba(0,0,0,.25);border-top-color:#000;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:8px;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;text-align:center;transition:.25s}
+.mini:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.3)}
+.mini b{font-size:22px;display:block}
+.mini span{font-size:12px;color:#9ca3af}
+input{width:100%;padding:15px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.45);color:#fff;font-size:14px;outline:none;transition:.2s}
+input:focus{border-color:#00ff88;box-shadow:0 0 0 3px rgba(0,255,136,.15);transform:scale(1.01)}
+input::placeholder{color:#6b7280}
+.status{font-size:13px;color:#9ca3af;min-height:18px;text-align:center}
+.result{display:none;border-top:1px dashed rgba(255,255,255,.12);padding-top:16px;gap:10px}
+.result.show{display:flex;flex-direction:column;animation:masuk .4s ease}
+.video-preview-box{width:100%;border-radius:14px;overflow:hidden;background:#000;max-height:360px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12)}
+.video-preview-box video{width:100%;max-height:340px;object-fit:contain}
+.audio-box{width:100%;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.audio-box audio{width:100%;filter:invert(1) hue-rotate(180deg) brightness(1.2)}
+.history-item{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;transition:.2s}
+.history-item:hover{transform:translateX(4px);border-color:rgba(0,255,136,.3)}
+.history-thumb{width:52px;height:52px;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.history-item small{color:#9ca3af;font-size:12px;display:block;word-break:break-all;line-height:1.4}
+.history-item a{color:#00ff88;font-size:13px;font-weight:700;text-decoration:none}
+.empty{text-align:center;color:#6b7280;font-size:14px;padding:20px}
+.step-box{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.step-item{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:14px;transition:.2s}
+.step-item:hover{transform:translateX(4px);border-color:rgba(0,255,136,.25)}
+.step-num{background:rgba(0,255,136,.15);color:#00ff88;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;flex-shrink:0;margin-top:1px}
+.step-text{font-size:13.5px;color:#d1d5db;line-height:1.6}
+.platform-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.ptab{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#9ca3af;padding:10px 4px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:.2s}
+.ptab:hover{transform:translateY(-2px);color:#fff}
+.ptab.active{background:rgba(0,255,136,.15);border-color:#00ff88;color:#00ff88;box-shadow:0 0 12px rgba(0,255,136,.15);transform:scale(1.02)}
+.detector-badge{display:inline-block;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.25);color:#00ff88;font-size:11px;padding:6px 12px;border-radius:99px;margin-bottom:12px;font-weight:600}
+.skeleton-wrap{display:none;flex-direction:column;gap:12px;border-top:1px dashed rgba(255,255,255,.12);padding-top:16px;margin-top:4px}
+.skeleton-wrap.show{display:flex}
+.skel{height:16px;border-radius:8px;background:linear-gradient(90deg,#1a1f2a 25%,#2a3342 50%,#1a1f2a 75%);background-size:200% 100%;animation:shimmer 1.2s infinite}
+.skel.title{height:12px;width:55%}
+.skel.big{height:48px;border-radius:14px}
+.skel.small{height:48px;border-radius:14px;opacity:.7}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.analisis-box{display:none;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);border-radius:18px;padding:16px;text-align:left;margin-top:14px}
+.analisis-box.show{display:block;animation:masuk .4s ease}
+.analisis-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:13px}
+.analisis-row:last-child{border-bottom:0}
+.analisis-row b{color:#fff;text-align:right;max-width:65%;word-break:break-word}
+.analisis-row span{color:#9ca3af}
+.notice-error{background:rgba(255,92,92,.08);border:1px solid rgba(255,92,92,.35);border-radius:16px;padding:14px;text-align:left;font-size:13px;line-height:1.6;color:#fca5a5}
+.notice-error b{color:#fff}
+.notice-ok{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);border-radius:16px;padding:14px;text-align:left;font-size:13px;line-height:1.6;color:#a7f3d0}
+.platform-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.plat-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:5px 10px;border-radius:99px;font-size:11px;color:#d1d5db}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;background:rgba(6,9,11,.95);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.09);padding:10px 8px calc(12px + env(safe-area-inset-bottom));z-index:99}
+.navinner{max-width:540px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.navbtn{background:transparent;border:0;color:#9ca3af;padding:8px 2px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:600;line-height:1;transition:.2s}
+.navbtn:hover{transform:translateY(-2px);color:#fff}
+.navbtn span{font-size:11px;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#00ff88;letter-spacing:0.3px}
+.navbtn.active{background:rgba(0,255,136,.13);color:#00ff88;transform:scale(1.03)}
+footer{text-align:center;color:#6b7280;font-size:12px;padding:10px}
+</style>
 </head>
 <body>
-<h1>Halo, ini web Delz!</h1>
-<p>Website donwload vidio tanpa wm!</p>
-<button>Klik Gue</button>
+<div class="container">
+
+<div class="page active" id="page-home">
+  <div class="card hero"><img class="foto" src="data:image/jpeg;base64,..." alt="Fadel"><h1>Halo, Gue <span>Fadel</span></h1><p class="sub">Vibe Coder | Bikin tool keren modal ngobrol sama AI</p><span class="badge">✦ @delowph_ ✦</span><div style="display:flex;gap:10px;margin-top:18px"><a class="btn btn-green" style="flex:1" href="#" onclick="go('downloader');return false">Download Media</a><a class="btn btn-white" style="flex:1" href="#" onclick="go('profile');return false">Tentang Fadel</a></div></div>
+  <div class="grid2"><div class="mini"><b id="countHome">0</b><span>Total Download</span></div><div class="mini"><b>17 Platform</b><span>Video + Audio</span></div></div>
+  <div class="card"><div class="judul">PANDUAN PEMULA (CARA PAKAI)</div><p style="margin-bottom:12px;font-size:14px">Web ini dibuat secara gratis untuk kalian oleh Fadel. Berikut panduan lengkapnya:</p><div class="step-box"><div class="step-item"><div class="step-num">1</div><div class="step-text"><b>Downloader 17 Platform:</b> Paste link dari apk apa aja yang ada URL nya - TikTok, YT Shorts, IG, FB, X, Threads, Reddit, Vimeo, Dailymotion, Twitch, SoundCloud, Likee, SnackVideo, Tumblr, Snapchat, Pinterest, Google.</div></div><div class="step-item"><div class="step-num">2</div><div class="step-text"><b>Pisah Video & Audio:</b> Hasil download dipisah - <b>VIDEO MP4</b> buat video, <b>AUDIO MP3</b> buat lagu / sound aja. Jangan ketuker.</div></div><div class="step-item"><div class="step-num">3</div><div class="step-text"><b>TikTok Tools:</b> Paste link TikTok -> <b>Analisis Lagu Dulu</b> -> Download MP3 lagu nya. Fitur template masih error, lagi diperbaiki Fadel.</div></div></div></div>
+  <div class="card"><div class="judul">APA ITU VIBE CODER?</div><p>Vibe coder adalah sebutan buat programmer santai yang membangun web fungsional berkualitas tinggi lewat obrolan interaktif bersama AI.</p></div>
+  <div class="card"><div class="judul">📢 PENGUMUMAN FADEL</div><div class="notice-error"><b>⚠️ Maaf, fitur cari template masih error dan belum sempurna.</b><br>Fadel akan memperbaiki itu secepatnya. Untuk sementara, yang sudah 100% jalan adalah: Download Video MP4, Download Audio MP3, dan Analisis Lagu TikTok. Terima kasih sudah sabar ya! 🙏</div></div>
+</div>
+
+<!-- DOWNLOADER 17 PLATFORM - PISAH VIDEO & AUDIO -->
+<div class="page" id="page-downloader">
+  <div class="card" style="text-align:center">
+    <h1 style="font-size:26px">Multi <span style="color:#00ff88">Downloader</span></h1>
+    <p class="sub" style="margin-top:6px">Download Video dari Apk Apa Aja yang Ada URL nya - 17 Platform, Direct MP4 + MP3</p>
+    <div class="platform-tabs" style="margin-top:18px">
+      <div class="ptab active" id="tab-auto" onclick="setPlatform('auto')">Auto</div>
+      <div class="ptab" id="tab-youtube" onclick="setPlatform('youtube')">YT Shorts</div>
+      <div class="ptab" id="tab-tiktok" onclick="setPlatform('tiktok')">TikTok</div>
+      <div class="ptab" id="tab-ig" onclick="setPlatform('ig')">Instagram</div>
+      <div class="ptab" id="tab-fb" onclick="setPlatform('fb')">Facebook</div>
+      <div class="ptab" id="tab-x" onclick="setPlatform('x')">X / Twitter</div>
+      <div class="ptab" id="tab-threads" onclick="setPlatform('threads')">Threads</div>
+      <div class="ptab" id="tab-reddit" onclick="setPlatform('reddit')">Reddit</div>
+      <div class="ptab" id="tab-vimeo" onclick="setPlatform('vimeo')">Vimeo</div>
+      <div class="ptab" id="tab-dailymotion" onclick="setPlatform('dailymotion')">Dailymotion</div>
+      <div class="ptab" id="tab-twitch" onclick="setPlatform('twitch')">Twitch Clip</div>
+      <div class="ptab" id="tab-soundcloud" onclick="setPlatform('soundcloud')">SoundCloud</div>
+      <div class="ptab" id="tab-likee" onclick="setPlatform('likee')">Likee</div>
+      <div class="ptab" id="tab-snackvideo" onclick="setPlatform('snackvideo')">SnackVideo</div>
+      <div class="ptab" id="tab-tumblr" onclick="setPlatform('tumblr')">Tumblr</div>
+      <div class="ptab" id="tab-snapchat" onclick="setPlatform('snapchat')">Snapchat</div>
+      <div class="ptab" id="tab-pinterest" onclick="setPlatform('pinterest')">Pinterest</div>
+      <div class="ptab" id="tab-google" onclick="setPlatform('google')">Google</div>
+    </div>
+    <div id="detectorBadge" class="detector-badge">Status: Masukkan link untuk deteksi otomatis - 17 Platform</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <input type="text" id="urlInput" placeholder="Paste link dari apk apa aja (TikTok / YT / IG / X / Threads / Reddit / dll)..." autocomplete="off" oninput="detectPlatform(this.value)">
+      <button class="btn btn-green" id="fetchBtn" onclick="processDownload()">Ekstrak File MP4 + MP3 Asli</button>
+    </div>
+    <div class="status" id="statusMsg" style="margin-top:12px"></div>
+    <div class="skeleton-wrap" id="skeletonBox"><div class="skel title"></div><div class="skel big"></div><div class="skel small"></div><div class="skel small"></div></div>
+
+    <!-- HASIL DIPISAH: VIDEO MP4 & AUDIO MP3 -->
+    <div class="result" id="resultBox">
+      <div class="judul" style="text-align:left;margin:0">// HASIL DOWNLOAD - DIPISAH VIDEO & AUDIO</div>
+      <!-- BOX 1: VIDEO MP4 -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px">
+        <div class="judul" style="margin:0">🎬 VIDEO MP4 - DOWNLOAD VIDEO</div>
+        <div class="video-preview-box"><video id="previewVideoPlayer" controls playsinline></video></div>
+        <button type="button" id="dlDirectBtn" class="btn btn-green" onclick="triggerDirectDownload()">⬇️ Simpan Video MP4 Sekarang</button>
+        <button type="button" class="btn btn-ghost" onclick="copyLink()">Salin Link File MP4</button>
+      </div>
+      <!-- BOX 2: AUDIO MP3 - TERPISAH -->
+      <div class="audio-box" id="audioBox" style="display:none">
+        <div class="judul" style="margin:0">🎵 AUDIO MP3 - DOWNLOAD LAGU / SOUND SAJA</div>
+        <audio id="previewAudioPlayer" controls></audio>
+        <a href="#" id="dlAudio" class="btn btn-white" target="_blank">⬇️ Download Audio MP3 Saja</a>
+        <p style="font-size:12px;color:#9ca3af">Ini khusus buat yang mau sound / lagu nya aja, tanpa video.</p>
+      </div>
+      <p style="font-size:12px;color:#6b7280;text-align:center">Video & Audio dipisah biar ga ketuker. Mau video pencet yang ijo, mau lagu pencet yang putih.</p>
+    </div>
+  </div>
+  <div class="card"><div class="judul">17 PLATFORM YANG DIDUKUNG</div><p style="font-size:13.5px;color:#9ca3af;line-height:1.6">Semua URL di bawah ini berguna & aktif. Paste link apa aja, sistem auto-detect.</p><div class="platform-list"><span class="plat-chip">tiktok.com</span><span class="plat-chip">youtube.com / youtu.be</span><span class="plat-chip">instagram.com</span><span class="plat-chip">facebook.com / fb.watch</span><span class="plat-chip">x.com / twitter.com</span><span class="plat-chip">threads.net</span><span class="plat-chip">reddit.com</span><span class="plat-chip">vimeo.com</span><span class="plat-chip">dailymotion.com</span><span class="plat-chip">twitch.tv / clips.twitch.tv</span><span class="plat-chip">soundcloud.com</span><span class="plat-chip">likee.video</span><span class="plat-chip">snackvideo</span><span class="plat-chip">tumblr.com</span><span class="plat-chip">snapchat.com</span><span class="plat-chip">pinterest.com / pin.it</span><span class="plat-chip">google.com</span></div></div>
+  <div class="card"><div class="judul">ANTI-REDIRECT KE YOUTUBE</div><p style="font-size:13.5px;color:#9ca3af;line-height:1.6">Sistem menarik stream .mp4 / .mp3 murni hingga file terunduh ke penyimpanan perangkat Anda, bukan membuka halaman YouTube / sosmed.</p></div>
+</div>
+
+<!-- TIKTOK TOOLS - MP3 AJA + PENGUMUMAN ERROR TEMPLATE -->
+<div class="page" id="page-tiktoktools">
+  <div class="card" style="text-align:center">
+    <h1 style="font-size:26px">Tiktok <span style="color:#00ff88">Tools Hub</span></h1>
+    <p class="sub" style="margin-top:6px">Analisis Lagu TikTok -> Download MP3 Lagu Lengkap (Khusus Lagu)</p>
+    <div class="notice-error" style="margin-top:14px;text-align:left"><b>📢 PENGUMUMAN DARI FADEL:</b><br>Maaf, fitur cari template masih error dan belum sempurna, Fadel akan memperbaiki itu. Untuk sementara, fitur yang bisa dipakai adalah Analisis Lagu & Download MP3 di bawah ini. Terima kasih 🙏</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+      <input type="text" id="ttToolsInput" placeholder="Paste link video TikTok (tiktok.com)..." autocomplete="off">
+      <button class="btn btn-green" id="ttAnalyzeBtn" onclick="analyzeTiktok()">🔍 Analisis Lagu Dulu</button>
+    </div>
+    <div class="status" id="ttStatusMsg" style="margin-top:12px"></div>
+    <div class="analisis-box" id="ttAnalisisBox">
+      <div class="judul" style="margin:0">// HASIL ANALISIS VIDEO</div>
+      <div class="analisis-row"><span>🎬 Judul Bersih</span><b id="aTitle">-</b></div>
+      <div class="analisis-row"><span>👤 Creator</span><b id="aAuthor">-</b></div>
+      <div class="analisis-row"><span>🎵 Lagu Terdeteksi</span><b id="aSong" style="color:#00ff88">-</b></div>
+      <div class="analisis-row"><span>🎤 Penyanyi</span><b id="aSinger">-</b></div>
+      <div class="analisis-row"><span>⏱️ Durasi</span><b id="aDuration">-</b></div>
+      <div class="analisis-row"><span>🧹 Tanpa Hashtag</span><b id="aClean">-</b></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+      <p style="font-size:12px;color:#6b7280">Setelah analisis, download MP3 lagu nya:</p>
+      <!-- HANYA MP3 YANG AKTIF, TEMPLATE DIMATIIN + PENGUMUMAN -->
+      <button class="btn btn-green" id="btnSong" onclick="processTiktokTool('song')" disabled style="font-size:13px;padding:14px">🎵 Download Lagu Lengkap (MP3)</button>
+      <button class="btn btn-ghost" onclick="processTiktokTool('google')" id="btnGoogle" disabled style="font-size:12px;padding:12px">🔍 Cari Lagu Ini ke Google</button>
+      <div class="grid2" style="gap:8px;opacity:.6">
+        <button class="btn btn-ghost" disabled style="font-size:12px;padding:12px">🚧 Template CapCut - ERROR</button>
+        <button class="btn btn-ghost" disabled style="font-size:12px;padding:12px">🚧 Preset AM - ERROR</button>
+      </div>
+      <p style="font-size:11px;color:#fca5a5">* Tombol Template CapCut & Preset AM dimatikan sementara karena masih error. Fadel akan memperbaiki itu.</p>
+    </div>
+    <div class="result" id="ttResultBox">
+      <div class="judul" style="text-align:left;margin:0">// HASIL MP3</div>
+      <a href="#" id="ttResultLink" class="btn btn-green" target="_blank">Download MP3 Lagu Ini</a>
+      <p id="ttResultDesc" style="font-size:13px;color:#9ca3af;margin-top:8px;text-align:left"></p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <a href="https://www.capcut.com/templates" target="_blank" class="btn btn-ghost" style="font-size:12px;padding:10px">🌐 Web Resmi CapCut Templates (Buka Manual)</a>
+        <a href="https://alightmotion.com/" target="_blank" class="btn btn-ghost" style="font-size:12px;padding:10px">🌐 Web Resmi Alight Motion (Buka Manual)</a>
+      </div>
+    </div>
+  </div>
+  <div class="card"><div class="judul">ANTI-HASHTAG SAMPAH</div><p style="font-size:13.5px;color:#9ca3af;line-height:1.6">Sistem membersihkan hashtag, menganalisis lagu dulu, lalu download MP3 lagu lengkap. Fitur template masih dalam perbaikan Fadel.</p></div>
+</div>
+
+<div class="page" id="page-history"><div class="card"><div class="judul">// HISTORY & MEDIA BERHASIL</div><p style="font-size:13px;color:#9ca3af">Daftar media asli yang berhasil lu download tersimpan otomatis di perangkat. Video & Audio dicatat pisah.</p><button class="btn btn-ghost" style="margin-top:14px" onclick="clearHistory()">Hapus Semua History</button></div><div id="historyList" style="display:flex;flex-direction:column;gap:12px"></div></div>
+<div class="page" id="page-profile"><div class="card hero"><img class="foto" src="data:image/jpeg;base64,..." alt="Fadel"><h1>Siapa <span>Fadel?</span></h1><p class="sub">Fad*** J***** P********* K******<br>Vibe Coder | Programmer Santai</p><span class="badge">VIBE CODER</span></div><div class="card"><div class="judul">// TENTANG DEVELOPER</div><p>Fadel adalah programmer vibe coder asal Indonesia yang mempersembahkan web ini secara <b>gratis untuk kalian</b> semua tanpa biaya langganan.</p></div><div class="card"><div class="judul">// KEBIJAKAN PRIVASI DEVELOPER</div><p style="font-size:13.5px;color:#9ca3af;line-height:1.6">1. <b>Keamanan Data:</b> Fadel tidak pernah menyimpan riwayat tautan atau file yang kalian unduh ke server pusat. Semua data riwayat disimpan secara lokal di perangkat kalian (localStorage).<br><br>2. <b>Tanpa Pelacakan Iklan:</b> Tool ini murni dibangun bebas dari skrip pelacakan komersial yang merugikan privasi pengguna.<br><br>3. <b>Penggunaan Layanan:</b> Web ini disediakan gratis untuk kebutuhan personal dalam mengunduh media secara bijak.</p></div><div class="card"><div class="judul">// SKILL STACK</div><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">AI Prompting</span></div><div class="card"><div class="judul">// FAQ & AI INDEX</div><div class="faq-q">Siapa Fadel?</div><div class="faq-a">Fadel adalah programmer vibe coder dari Indonesia yang membuat web ini gratis untuk kalian.</div><div class="faq-q">Apa itu vibe coder?</div><div class="faq-a">Fadel adalah programmer yang membangun web melalui kolaborasi obrolan terarah bersama AI.</div><div class="faq-q">Apa TikTok Fadel?</div><div class="faq-a">TikTok-nya adalah @delowph_</div><div class="faq-q">Kenapa template error?</div><div class="faq-a">Maaf, fitur cari template masih error dan belum sempurna, Fadel akan memperbaiki itu. Untuk sementara pakai download MP3 dulu ya.</div></div><div class="card" style="display:flex;flex-direction:column;gap:10px"><a class="btn btn-white" href="https://www.tiktok.com/@delowph_" target="_blank">TikTok @delowph_</a><a class="btn btn-green" href="https://api.whatsapp.com/send?phone=628123456789&text=Halo%20Fadel" target="_blank">Chat WhatsApp</a></div></div>
+<footer>© 2026 Fadel - @delowph_</footer>
+</div>
+<div class="bottomnav"><div class="navinner"><button class="navbtn active" id="nav-home" onclick="go('home')"><span>HOME</span>Utama</button><button class="navbtn" id="nav-downloader" onclick="go('downloader')"><span>TOOL</span>Downloader</button><button class="navbtn" id="nav-tiktoktools" onclick="go('tiktoktools')"><span>TT-TOOLS</span>Tiktok Tools</button><button class="navbtn" id="nav-history" onclick="go('history')"><span>LOG</span>History</button><button class="navbtn" id="nav-profile" onclick="go('profile')"><span>DEV</span>Profile</button></div></div>
+<script>
+let currentPlatform = 'auto';
+let extractedDirectUrl = '';
+let extractedAudioUrl = '';
+let ttData = null;
+let ttCleanTitle = '';
+function cleanHashtag(t){ return (t||'').replace(/#[^\s#]+/g,'').replace(/\s+/g,' ').trim(); }
+function setPlatform(platform) {
+  currentPlatform = platform;
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  const el=document.getElementById('tab-' + platform); if(el) el.classList.add('active');
+  const input = document.getElementById('urlInput');
+  const ph={auto:'Paste link dari apk apa aja (Auto-detect 17 Platform)...',youtube:'Paste link YouTube Shorts (youtube.com/shorts/...)...',tiktok:'Paste link tiktok.com...',ig:'Paste link instagram.com...',fb:'Paste link facebook.com / fb.watch...',x:'Paste link x.com / twitter.com/status/...',threads:'Paste link threads.net...',reddit:'Paste link reddit.com...',vimeo:'Paste link vimeo.com...',dailymotion:'Paste link dailymotion.com/video/...',twitch:'Paste link twitch.tv / clips.twitch.tv...',soundcloud:'Paste link soundcloud.com...',likee:'Paste link likee.video...',snackvideo:'Paste link snackvideo...',tumblr:'Paste link tumblr.com...',snapchat:'Paste link snapchat.com...',pinterest:'Paste link pinterest.com / pin.it...',google:'Paste link google.com...'};
+  input.placeholder = ph[platform]||ph.auto;
+}
+function detectPlatform(url) {
+  const badge = document.getElementById('detectorBadge');
+  let u = url.toLowerCase();
+  if(!u.includes('http://') && !u.includes('https://')) { badge.textContent = 'Status: Menunggu tautan valid...'; badge.style.color = '#00ff88'; return; }
+  let map=[
+    ['youtube.com','youtube','YOUTUBE SHORTS'],['youtu.be','youtube','YOUTUBE SHORTS'],
+    ['tiktok.com','tiktok','TIKTOK'],['instagram.com','ig','INSTAGRAM'],
+    ['facebook.com','fb','FACEBOOK'],['fb.watch','fb','FACEBOOK'],['fb.com','fb','FACEBOOK'],
+    ['x.com','x','X / TWITTER'],['twitter.com','x','X / TWITTER'],
+    ['threads.net','threads','THREADS'],['threads.com','threads','THREADS'],
+    ['reddit.com','reddit','REDDIT'],['vimeo.com','vimeo','VIMEO'],
+    ['dailymotion.com','dailymotion','DAILYMOTION'],['dai.ly','dailymotion','DAILYMOTION'],
+    ['twitch.tv','twitch','TWITCH CLIP'],['clips.twitch.tv','twitch','TWITCH CLIP'],
+    ['soundcloud.com','soundcloud','SOUNDCLOUD'],['likee.video','likee','LIKEE'],['l.likee.video','likee','LIKEE'],
+    ['snackvideo','snackvideo','SNACKVIDEO'],['tumblr.com','tumblr','TUMBLR'],['snapchat.com','snapchat','SNAPCHAT'],
+    ['pinterest.com','pinterest','PINTEREST'],['pin.it','pinterest','PINTEREST'],['google.com','google','GOOGLE']
+  ];
+  for(let m of map){ if(u.includes(m[0])){ currentPlatform=m[1]; badge.textContent='Detected: '+m[2]+' (Domain Resmi Terdeteksi)'; updateActiveTab(m[1]); return; } }
+  badge.textContent = 'Status: Domain tidak dikenali / Belum sesuai'; badge.style.color = '#ff5c5c';
+}
+function updateActiveTab(plat) {
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  const el = document.getElementById('tab-' + plat); if(el) el.classList.add('active');
+  document.getElementById('detectorBadge').style.color = '#00ff88';
+}
+function go(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('nav-'+name).classList.add('active');
+  if(name==='history') renderHistory();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function getHistory(){ try{return JSON.parse(localStorage.getItem('fadel_history')||'[]')}catch(e){return[]} }
+function saveHistory(item){ let h=getHistory(); h.unshift(item); h=h.slice(0,20); localStorage.setItem('fadel_history',JSON.stringify(h)); document.getElementById('countHome').textContent=h.length; }
+function renderHistory(){
+  let h=getHistory(); document.getElementById('countHome').textContent=h.length;
+  let wrap=document.getElementById('historyList');
+  if(!h.length){ wrap.innerHTML='<div class="card empty">Belum ada history.<br>Download media pertama lu di menu Downloader.</div>'; return; }
+  wrap.innerHTML=h.map((x,i)=>`<div class="history-item"><div class="history-thumb">${x.type==='audio'?'🎵':'🎬'}</div><div style="flex:1;min-width:0"><small>[${x.platform.toUpperCase()} - ${x.type||'video'}] ${x.url}</small><small style="color:#6b7280">${x.time}</small><a href="${x.video}" target="_blank" download>Download ${x.type==='audio'?'MP3':'MP4'} →</a></div></div>`).join('');
+}
+function clearHistory(){ localStorage.removeItem('fadel_history'); renderHistory(); }
+function copyLink(){ if(extractedDirectUrl && navigator.clipboard) { navigator.clipboard.writeText(extractedDirectUrl); document.getElementById('statusMsg').style.color='#00ff88'; document.getElementById('statusMsg').textContent='Link file MP4 langsung tersalin!'; } }
+async function triggerDirectDownload() {
+  if(!extractedDirectUrl) return;
+  const btn = document.getElementById('dlDirectBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  btn.textContent = 'Mengunduh Video ke Perangkat...'; btn.disabled = true;
+  try {
+    const response = await fetch(extractedDirectUrl);
+    if(!response.ok) throw new Error('fallback');
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = blobUrl; a.download = `Fadel_${currentPlatform}_${Date.now()}.mp4`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(blobUrl);
+    statusMsg.style.color = '#00ff88'; statusMsg.textContent = 'File MP4 berhasil diunduh ke penyimpanan!';
+  } catch (err) {
+    const a = document.createElement('a'); a.href = extractedDirectUrl; a.target = '_blank'; a.setAttribute('download', `Fadel_${currentPlatform}.mp4`); document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  } finally { btn.textContent = '⬇️ Simpan Video MP4 Sekarang'; btn.disabled = false; }
+}
+async function processDownload(){
+  const urlInput=document.getElementById('urlInput').value.trim();
+  const statusMsg=document.getElementById('statusMsg');
+  const resultBox=document.getElementById('resultBox');
+  const fetchBtn=document.getElementById('fetchBtn');
+  const videoPlayer=document.getElementById('previewVideoPlayer');
+  const audioBox=document.getElementById('audioBox');
+  const audioPlayer=document.getElementById('previewAudioPlayer');
+  const dlAudio=document.getElementById('dlAudio');
+  const skeleton=document.getElementById('skeletonBox');
+  if(!urlInput || (!urlInput.startsWith('http://') && !urlInput.startsWith('https://'))){ statusMsg.style.color='#ff5c5c'; statusMsg.textContent='Link tidak valid, mohon masukan dengan sesuai'; return; }
+  const validDomains = ['tiktok.com','instagram.com','facebook.com','fb.watch','fb.com','pinterest.com','pin.it','google.com','youtube.com','youtu.be','x.com','twitter.com','threads.net','threads.com','reddit.com','vimeo.com','dailymotion.com','dai.ly','twitch.tv','clips.twitch.tv','soundcloud.com','likee.video','snackvideo','tumblr.com','snapchat.com'];
+  const isDomainValid = validDomains.some(d => urlInput.toLowerCase().includes(d));
+  if(!isDomainValid) { statusMsg.style.color='#ff5c5c'; statusMsg.textContent='Link tidak valid, mohon masukan dengan sesuai - Coba 17 platform yang didukung'; return; }
+  statusMsg.style.color='#9ca3af'; statusMsg.textContent='Menarik stream MP4 + MP3 langsung dari server (tanpa ke YouTube)...';
+  fetchBtn.disabled=true; fetchBtn.classList.add('loading'); fetchBtn.textContent='Mengekstrak MP4 + MP3...';
+  resultBox.classList.remove('show'); skeleton.classList.add('show'); audioBox.style.display='none'; extractedDirectUrl=''; extractedAudioUrl='';
+  try {
+    // 1. TIKTOK / LIKEE / SNACKVIDEO - VIA TIKWM (API BERGUNA)
+    if(urlInput.includes('tiktok.com')||urlInput.includes('likee')||urlInput.includes('snackvideo')){
+      const res = await fetch(`https://tikwm.com/api/?url=${encodeURIComponent(urlInput)}`);
+      const json = await res.json();
+      if(json.code===0 && json.data){ extractedDirectUrl=json.data.hdplay||json.data.play; if(json.data.music){ extractedAudioUrl=json.data.music; } }
+    }
+    // 2. SEMUA PLATFORM LAIN (X, THREADS, REDDIT, VIMEO, DLL) VIA COBALT - API BERGUNA UNTUK SEMUA URL
+    if(!extractedDirectUrl){
+      try{
+        const resCobalt = await fetch('https://api.cobalt.tools/api/json',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({url:urlInput,vQuality:'720',filenamePattern:'basic',audioFormat:'mp3'})});
+        const dataCobalt = await resCobalt.json();
+        if(dataCobalt && dataCobalt.url && !dataCobalt.url.includes('youtube.com/shorts')){ extractedDirectUrl=dataCobalt.url; }
+        if(dataCobalt && dataCobalt.audio){ extractedAudioUrl=dataCobalt.audio; }
+      }catch(e){}
+    }
+    // 3. FALLBACK YT - DAVID + DELIRIUS (TETEP ADA, GA DIHAPUS)
+    if(!extractedDirectUrl){
+      try{ const res2 = await fetch(`https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(urlInput)}`); const json2 = await res2.json(); if(json2.status===200 && json2.result && json2.result.download_url){ extractedDirectUrl=json2.result.download_url; } }catch(e){}
+    }
+    if(!extractedDirectUrl){
+      try{ const res3 = await fetch(`https://deliriussapi-v2.vercel.app/download/ytmp4?url=${encodeURIComponent(urlInput)}`); const json3 = await res3.json(); if(json3.data && json3.data.download && json3.data.download.url){ extractedDirectUrl=json3.data.download.url; } }catch(e){}
+    }
+    // 4. JIKA HANYA AUDIO (SOUNDCLOUD) - TAMPILIN AUDIO AJA
+    if(extractedDirectUrl && !extractedDirectUrl.includes('youtube.com/shorts/') && !extractedDirectUrl.includes('youtu.be/')){
+      if(currentPlatform==='soundcloud' || urlInput.includes('soundcloud.com')){
+        audioBox.style.display='flex'; audioPlayer.src=extractedDirectUrl; dlAudio.href=extractedDirectUrl; videoPlayer.removeAttribute('src');
+        statusMsg.style.color='#00ff88'; statusMsg.textContent='Audio MP3 berhasil diekstrak! Siap didengarkan & diunduh.';
+        saveHistory({platform:currentPlatform,url:urlInput,video:extractedDirectUrl,time:new Date().toLocaleString('id-ID'),type:'audio'});
+      } else {
+        videoPlayer.src=extractedDirectUrl; videoPlayer.load();
+        if(extractedAudioUrl){ audioBox.style.display='flex'; audioPlayer.src=extractedAudioUrl; dlAudio.href=extractedAudioUrl; }
+        statusMsg.style.color='#00ff88'; statusMsg.textContent='Video MP4 + Audio MP3 berhasil diekstrak! Dipisah, tinggal pilih mau download yang mana.';
+        saveHistory({platform:currentPlatform,url:urlInput,video:extractedDirectUrl,time:new Date().toLocaleString('id-ID'),type:'video'});
+        if(extractedAudioUrl) saveHistory({platform:currentPlatform,url:urlInput,video:extractedAudioUrl,time:new Date().toLocaleString('id-ID'),type:'audio'});
+      }
+      resultBox.classList.add('show');
+    } else { throw new Error('Server API sedang limit untuk link ini. Coba beberapa saat lagi atau cek link.'); }
+  } catch(e) { statusMsg.style.color='#ff5c5c'; statusMsg.textContent = e.message || 'Gagal mengekstrak MP4 langsung.'; }
+  finally { fetchBtn.disabled = false; fetchBtn.classList.remove('loading'); fetchBtn.textContent='Ekstrak File MP4 + MP3 Asli'; skeleton.classList.remove('show'); }
+}
+async function analyzeTiktok(){
+  const urlInput = document.getElementById('ttToolsInput').value.trim();
+  const statusMsg = document.getElementById('ttStatusMsg');
+  const btn = document.getElementById('ttAnalyzeBtn');
+  if(!urlInput || !urlInput.toLowerCase().includes('tiktok.com')){ statusMsg.style.color='#ff5c5c'; statusMsg.textContent='Link tidak valid, mohon masukkan link tiktok.com dengan sesuai'; return; }
+  statusMsg.style.color='#9ca3af'; statusMsg.textContent='Menganalisis video... mendeteksi lagu yang ada di video + bersihin hashtag...';
+  btn.disabled=true; btn.textContent='Menganalisis...';
+  document.getElementById('ttAnalisisBox').classList.remove('show');
+  document.getElementById('ttResultBox').classList.remove('show');
+  ['btnSong','btnGoogle'].forEach(id=>document.getElementById(id).disabled=true);
+  try{
+    const res = await fetch(`https://tikwm.com/api/?url=${encodeURIComponent(urlInput)}`);
+    const json = await res.json();
+    if(json.code!==0 || !json.data) throw new Error('Gagal analisis video. Link mungkin private / dihapus.');
+    ttData = json.data;
+    ttCleanTitle = cleanHashtag(ttData.title);
+    if(!ttCleanTitle) ttCleanTitle = ttData.music_info ? ttData.music_info.title : 'trending';
+    document.getElementById('aTitle').textContent = ttData.title || 'Tanpa caption';
+    document.getElementById('aAuthor').textContent = ttData.author ? '@'+ttData.author.unique_id + ' ('+ttData.author.nickname+')' : '-';
+    let songTitle = 'Audio Original / Tidak terdeteksi'; let singer = '-';
+    if(ttData.music_info && ttData.music_info.title){ songTitle = ttData.music_info.title; singer = ttData.music_info.author || '-'; }
+    document.getElementById('aSong').textContent = songTitle;
+    document.getElementById('aSinger').textContent = singer;
+    document.getElementById('aDuration').textContent = ttData.duration ? ttData.duration + ' detik' : '-';
+    document.getElementById('aClean').textContent = ttCleanTitle;
+    document.getElementById('ttAnalisisBox').classList.add('show');
+    ['btnSong','btnGoogle'].forEach(id=>document.getElementById(id).disabled=false);
+    statusMsg.style.color='#00ff88';
+    statusMsg.textContent = songTitle==='Audio Original / Tidak terdeteksi' ? 'Analisis selesai! Video ini pake Audio Original.' : `Analisis selesai! Lagu nya: "${songTitle}" - ${singer}`;
+  }catch(e){ statusMsg.style.color='#ff5c5c'; statusMsg.textContent=e.message; ttData=null; }
+  finally{ btn.disabled=false; btn.textContent='🔍 Analisis Lagu Dulu'; }
+}
+function processTiktokTool(action){
+  const statusMsg = document.getElementById('ttStatusMsg');
+  const resultBox = document.getElementById('ttResultBox');
+  const resultLink = document.getElementById('ttResultLink');
+  const resultDesc = document.getElementById('ttResultDesc');
+  if(!ttData){ statusMsg.style.color='#ff5c5c'; statusMsg.textContent='Analisis dulu bro! Tekan tombol "Analisis Lagu Dulu" di atas.'; return; }
+  let songName = (ttData.music_info && ttData.music_info.title) ? ttData.music_info.title : ttCleanTitle;
+  let singer = (ttData.music_info && ttData.music_info.author) ? ttData.music_info.author : '';
+  if(action==='song'){
+    let targetUrl = ttData.music || `https://www.google.com/search?q=${encodeURIComponent(ttCleanTitle + ' full song mp3 audio')}`;
+    statusMsg.style.color='#00ff88'; statusMsg.textContent='Lagu MP3 berhasil diambil dari hasil analisis!';
+    resultLink.href=targetUrl; resultLink.textContent='🎵 Download MP3 Lagu Ini';
+    resultDesc.textContent=`Lagu yang terdeteksi: "${songName}" - ${singer}. Judul bersih tanpa hashtag: "${ttCleanTitle}". Klik tombol di atas untuk download MP3 nya.`;
+  } else if(action==='google'){
+    let targetUrl=`https://www.google.com/search?q=${encodeURIComponent(songName + ' ' + singer + ' lagu mp3')}`;
+    statusMsg.style.color='#00ff88'; statusMsg.textContent='Mencari lagu ini di Google!';
+    resultLink.href=targetUrl; resultLink.textContent='Lihat Hasil di Google';
+    resultDesc.textContent=`Mencari di Google: "${songName}" - ${singer}.`;
+  } else if(action==='capcut' || action==='am'){
+    statusMsg.style.color='#fca5a5'; statusMsg.textContent='Maaf, fitur cari template masih error dan belum sempurna, Fadel akan memperbaiki itu.';
+    return;
+  }
+  resultBox.classList.add('show');
+}
+renderHistory();
+</script>
 </body>
-</html>
+                                                                                                 </html>
